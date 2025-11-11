@@ -36,4 +36,6 @@ function createUserRepository(newUser) {
   });
 }
 
-
+export default {
+  createUserRepository,
+};
