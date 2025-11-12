@@ -38,6 +38,30 @@ function createUserRepository(newUser) {
   });
 }
 
+function findUserByEmailRepository(email) {
+  return new Promise((resolve, reject) => {
+    // Segundo o professor ele usou, db.get ao invés de db.send, porque o db.get é mais performático
+    // Lembre-se que a interrogação abaixo é para impedir sql injection
+    db.get(
+      `
+        SELECT id, username, email, avatar
+        FROM users
+        WHERE email = ?
+        
+        `,
+      [email],
+      (err, row) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(row);
+        }
+      }
+    );
+  });
+}
+
 export default {
   createUserRepository,
+  findUserByEmailRepository,
 };
