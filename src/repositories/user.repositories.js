@@ -13,7 +13,7 @@ db.run(`
     `);
 
 function createUserRepository(newUser) {
-  return new Promise((res, rej) => {
+  return new Promise((resolve, reject) => {
     // Nesta linha a seguir o professor fez uma desestruturação para poder usar elas diretamente dentro
     // do colchetes linhas abaixo desta
     // Estas interrogações abaixo é para evitar injeção de dependências, ou seja, ataques maliciosos
@@ -27,9 +27,11 @@ function createUserRepository(newUser) {
       [username, email, password, avatar],
       (err) => {
         if (err) {
-          rej(err);
+          reject(err);
         } else {
-          res({ message: "User created" });
+          //res({ message: "User created" });
+          // O professor apagou o comando anterior que comentei para escrever este a seguir
+          resolve({ id: this.lastID, ...newUser });
         }
       }
     );
