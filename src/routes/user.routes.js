@@ -16,9 +16,8 @@ router.post(
 
 router.get("/users", userController.findAllUserController);
 router.get("/users/:id", userController.findUserByIdController);
-router.put(
+router.patch(
   "/users/:id",
-  validate(userSchema),
   validateUserId,
   userController.updateUserController
 );
