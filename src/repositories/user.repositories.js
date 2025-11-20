@@ -19,7 +19,9 @@ function createUserRepository(newUser) {
       VALUES (?,?,?,?) 
       `,
       [username, email, password, avatar],
-      (err) => {
+      // O professor substituiu a arrow function que estava anteriormente na linha abaixo por uma função anônima
+      // pois uma function consegue retornar o this.lastID que precisamos
+     function (err) {
         if (err) {
           reject(err);
         } else {
@@ -34,7 +36,7 @@ function findUserByEmailRepository(email) {
   return new Promise((resolve, reject) => {
     db.get(
       ` 
-        SELECT id, username, email, avatar
+        SELECT id, username, email, avatar, password
         FROM users
         WHERE email = ?        
       `,
